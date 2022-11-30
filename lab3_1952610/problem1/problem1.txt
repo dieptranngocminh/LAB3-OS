@@ -1,0 +1,26 @@
+Problem1.1: There are 3 possible cases:
+The maximum number of student is 40.
+Case 1: The current number of student is 39.
+At one time, there are 2 students enroll. 
+The number of student will be over the maximum number.
+
+Case 2: The current number of student is 1.
+At one time, there are 2 students disenroll.
+The number of student will be negative.
+
+Case 3: The current number of student is 3.
+At one time, there is 1 student enroll and 1 student disenroll.
+The number of student can be 4 or 2 (not 3).  
+
+Problem 1.2:
+The number of student is shared variable so we use
+synchronization with thread for solution
+
+void* mythread(void* arg){
+	Use mutex for counting the number of student.
+	Put 2 functions enroll() and disenroll() between pthread_mutex_lock(&lock) and pthread_mutex_unlock(&lock)
+
+	pthread_mutex_lock(&lock);
+	Divide 2 cases for 2 functions enroll() and disenroll()
+	pthread_mutex_unlock(&lock);_
+}

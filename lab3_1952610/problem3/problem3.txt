@@ -1,0 +1,10 @@
+Compare the performance of using mutex locks and semaphore with the previous
+one in Lab 2
+
+We compare the run time between two approach types.
+The run time of Lab2 is faster than the run time of Lab3.
+By running Makefile, we can see the difference of time between 2 versions.
+ 
+
+
+

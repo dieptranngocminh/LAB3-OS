@@ -1,0 +1,26 @@
+Problem2:
+2.1. In each program, there are 2 thread functions which is inc_count and watch_count 
+There is a global variable count, a shared resource that two threads(inc_count) increment.
+- The cond_usg.c program will run following steps:
+	1 Two thread 2,3(inc_count) run with the gradually increment of count variable to 20(count=20)
+	2 Thread 1 (watch_count) changes the count variable to 80(count=80)
+	3 Two thread 2,3(int_count) run with the gradually increment of count variable to 290(count=290)
+
+- The nosynch.c program will run following steps:
+	1 Thread 1 (watch_count) changes the count variable to 12 and 92(count=21+80=92)
+	2 Two thread 2,3(inc_count) run with the randomly increment of count variable (count=11 & count=12)        
+        3 Two thread 2,3(int_count) run with the gradually increment of count variabe from 92 to 290   
+
+2.2. When we make the global variable count, we create the mutex count_mutex
+(in global scope) to protect the count variable.
+We use the count_threshold_cv condition variable to represent an event
+(the 80-increment event). It means the count variable's reaching a defined threshold
+value, watch_count.
+The main routine creates two threads. Each of these threads runs the inc_count routine. 
+The inc_count routine locks count_mutex, increments count, reads count in a printf 
+statement, and tests for the threshold value. If count has reached its threshold 
+value, inc_count calls pthread_cond_signal to notify the thread that's waiting for 
+this particular event. Before exiting, inc_count releases the mutex. We'll create a 
+third thread to run the watch_count task. The watch_count routine waits for 
+inc_count to signal our count_threshold_cv condition variable.
+
